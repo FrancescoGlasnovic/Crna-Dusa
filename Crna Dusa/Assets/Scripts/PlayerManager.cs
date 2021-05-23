@@ -13,10 +13,11 @@ namespace crna
         PlayerLocomotion playerLocomotion;
 
         public bool isInteracting;
-
+        
         [Header("Player Flags")]
         public bool isSprinting;
-
+        public bool isInAir;
+        public bool isGrounded;
         private void Awake()
         {
             cameraHandler = CameraHandler.singleton;
@@ -43,6 +44,7 @@ namespace crna
             inputHandler.TickInput(delta);
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
+            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
         }
 
         private void FixedUpdate()
